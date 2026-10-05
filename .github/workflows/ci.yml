@@ -1,0 +1,26 @@
+﻿name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate folder structure
+        run: |
+          echo "Verifying core directories..."
+          test -d frontend
+          test -d backend
+          test -d ai-service
+          test -d database
+          test -d docker
+          test -d tests
+          test -d docs
+          echo "All core directories present."
